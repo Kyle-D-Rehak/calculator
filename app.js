@@ -1,6 +1,7 @@
 let displayValue = '';
 let storedValue;
 let operator;
+
 const display = document.querySelector('.currentValue');
 const storage = document.querySelector('.storage');
 const numButtons = Array.from(document.querySelectorAll('.num-button'));
@@ -12,6 +13,12 @@ opButtons.forEach(button => button.addEventListener('click', runOperation));
 clearButtons.forEach(button => button.addEventListener('click', clear));
 
 function updateDisplayValue(e) {
+    if (/\./.test(displayValue) && e.currentTarget.value ==='.') {
+        return;
+    }
+    if (e.currentTarget.value === '.') {
+        decimalUsed = true;
+    }
     displayValue = `${displayValue}${e.currentTarget.value}`;
     display.textContent = displayValue;
 }
@@ -73,7 +80,6 @@ const solve = function (operation, a, b) {
     switch(operation) {
         case '+':
             displayValue = add(a, b);
-
             break;
         case '-':
             displayValue = subtract(a, b);
