@@ -7,10 +7,12 @@ const storage = document.querySelector('.storage');
 const numButtons = Array.from(document.querySelectorAll('.num-button'));
 const clearButtons = Array.from(document.querySelectorAll('.clear-button'));
 const opButtons = Array.from(document.querySelectorAll('.op-button'));
+const negButton = document.querySelector('.neg-button');
 
 numButtons.forEach(button => button.addEventListener('click', updateDisplayValue));
 opButtons.forEach(button => button.addEventListener('click', runOperation));
 clearButtons.forEach(button => button.addEventListener('click', clear));
+negButton.addEventListener('click', negate);
 
 function updateDisplayValue(e) {
     if (/\./.test(displayValue) && e.currentTarget.value ==='.') {
@@ -35,6 +37,16 @@ function clear(e) {
         storage.textContent = storedValue;
         display.textContent = displayValue;
     }
+}
+
+function negate() {
+    if (displayValue === 'ERROR') {
+        return;
+    } else {
+    displayValue = +displayValue * (-1);
+    display.textContent = displayValue;
+    }
+
 }
 
 function runOperation(e) {

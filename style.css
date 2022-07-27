@@ -39,7 +39,7 @@ header {
     'seven eight nine multiply'
     'four five six subtract'
     'one two three add'
-    'zero zero dot equal';
+    'neg zero dot equal';
 }
 
 .display {
@@ -68,6 +68,7 @@ header {
 }
 
 button {
+    background-color: lightgray;
     box-sizing: border-box;
     padding: 1rem;
     margin: 0px;
@@ -127,6 +128,11 @@ button {
 
 #dot {
     grid-area: dot;
+}
+
+#neg {
+    grid-area: neg;
+    padding: 0px 0px;
 }
 
 #clearAll {
