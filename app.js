@@ -15,6 +15,12 @@ clearButtons.forEach(button => button.addEventListener('click', clear));
 negButton.addEventListener('click', negate);
 
 function updateDisplayValue(e) {
+    if (/ERROR/.test(displayValue)) {
+        displayValue = storedValue;
+        storedValue = '';
+        storage.textContent = storedValue;
+        display.textContent = displayValue;
+    }
     if (/\./.test(displayValue) && e.currentTarget.value ==='.') {
         return;
     }
@@ -50,7 +56,7 @@ function negate() {
 }
 
 function runOperation(e) {
-    if (displayValue === 'ERROR') {
+    if (/ERROR/.test(displayValue)) {
         displayValue = storedValue;
         storedValue = '';
         storage.textContent = storedValue;
@@ -119,3 +125,73 @@ const solve = function (operation, a, b) {
 
     operator = '';
 }
+
+document.addEventListener('keypress', (e) => {
+    const keyName = e.key;
+
+    switch(keyName) {
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            if (/ERROR/.test(displayValue)) {
+                displayValue = storedValue;
+                storedValue = '';
+                storage.textContent = storedValue;
+                display.textContent = displayValue;
+            }
+            displayValue = `${displayValue}${keyName}`;
+            display.textContent = displayValue;
+            break;
+        case '.':
+            if (/\./.test(displayValue)) {
+                break;
+            } else {
+                displayValue = `${displayValue}${keyName}`;
+                display.textContent = displayValue;
+            }
+            break;
+        case '+':
+        case '-':
+        case 'x':
+        case '/':
+            if (/ERROR/.test(displayValue)) {
+                displayValue = storedValue;
+                storedValue = '';
+                storage.textContent = storedValue;
+                display.textContent = displayValue;
+                break;
+            }
+            if (keyName === '-' && e.ctrlKey) {
+                negate();
+                break;
+            }
+            operator = keyName;
+            storedValue = +displayValue;
+            displayValue = '';
+            storage.textContent = `${storedValue} ${operator}`;
+            display.textContent = displayValue;
+            break;
+        case '=':
+            if (displayValue === 'ERROR') {
+                displayValue = storedValue;
+                storedValue = '';
+                storage.textContent = storedValue;
+                display.textContent = displayValue;
+                break;
+            }
+            storage.textContent = '';
+            solve(operator, storedValue, +displayValue);
+            storedValue = '';
+            break;           
+        default:
+            break;
+
+    }
+})

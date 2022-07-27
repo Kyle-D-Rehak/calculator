@@ -78,6 +78,10 @@ button {
     font-weight: 800;
 }
 
+button:active {
+    transform: scale(.95);
+}
+
 .num-button {
     background-color: lightgray;
 }
