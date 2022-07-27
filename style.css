@@ -48,12 +48,23 @@ header {
     border-radius: 4px;
     padding: .5rem;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: flex-end;
-    height: 4rem;
-    font-size: 2rem;
-    font-weight: 600;
+    height: 3rem;
     text-align: right;
+    overflow: hidden;
+}
+.storage {
+    font-size: .9rem;
+    font-weight: 400;
+}
+
+.currentValue {
+    font-size: 1.75rem;
+    font-weight: 600;
+
+    
 }
 
 button {
