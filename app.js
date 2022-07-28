@@ -35,7 +35,6 @@ function clear(e) {
     if (e.currentTarget.value === 'clear') {
         displayValue = '';
         display.textContent = displayValue;
-        storage.textContent = storedValue;
     } else if (e.currentTarget.value === 'clear-all') {
         displayValue = '';
         storedValue = '';
